@@ -1,5 +1,5 @@
 blueprint:
-  name: Frigate Notifications (0.12.0.2)
+  name: Frigate Notifications (Custom)
   description: |
     ## Frigate Notifications
 
@@ -838,7 +838,9 @@ action:
                     - platform: mqtt
                       topic: frigate/events
                       payload: "{{ id }}"
-                      value_template: "{{ value_json['after']['id'] }}"
+                      #value_template: "{{ value_json['after']['id'] }}"
+                      value_template: >
+                        {{ trigger.payload_json["before"]["stationary"] == false }}
                   timeout:
                     minutes: 2
                   continue_on_timeout: false
